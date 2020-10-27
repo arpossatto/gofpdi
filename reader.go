@@ -6,12 +6,13 @@ import (
 	"compress/zlib"
 	"encoding/binary"
 	"fmt"
-	"github.com/pkg/errors"
 	"io"
 	"io/ioutil"
 	"math"
 	"os"
 	"strconv"
+
+	"github.com/pkg/errors"
 )
 
 type PdfReader struct {
@@ -850,19 +851,19 @@ func (this *PdfReader) readXref() error {
 					// Check for /DecodeParms
 					paethDecode := false
 					if _, ok := v.Dictionary["/DecodeParms"]; ok {
-						columns := 0
-						predictor := 0
+						// columns := 0
+						// predictor := 0
 
-						if _, ok2 := v.Dictionary["/DecodeParms"].Dictionary["/Columns"]; ok2 {
-							columns = v.Dictionary["/DecodeParms"].Dictionary["/Columns"].Int
-						}
-						if _, ok2 := v.Dictionary["/DecodeParms"].Dictionary["/Predictor"]; ok2 {
-							predictor = v.Dictionary["/DecodeParms"].Dictionary["/Predictor"].Int
-						}
+						// if _, ok2 := v.Dictionary["/DecodeParms"].Dictionary["/Columns"]; ok2 {
+						// 	columns = v.Dictionary["/DecodeParms"].Dictionary["/Columns"].Int
+						// }
+						// if _, ok2 := v.Dictionary["/DecodeParms"].Dictionary["/Predictor"]; ok2 {
+						// 	predictor = v.Dictionary["/DecodeParms"].Dictionary["/Predictor"].Int
+						// }
 
-						if columns > 4 || predictor > 12 {
-							return errors.New("Unsupported /DecodeParms - only tested with /Columns <= 4 and /Predictor <= 12")
-						}
+						// if columns > 4 || predictor > 12 {
+						// 	return errors.New("Unsupported /DecodeParms - only tested with /Columns <= 4 and /Predictor <= 12")
+						// }
 						paethDecode = true
 					}
 
